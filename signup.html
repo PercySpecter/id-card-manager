@@ -1,0 +1,176 @@
+<!doctype html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+   <head>
+      <title>COENSOBEC SignUp Form</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link href='https://fonts.googleapis.com/css?family=Andika' rel='stylesheet'>
+      <link rel="stylesheet" href="stylesheet.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      
+      <script>
+      
+      	var sname;
+	function showStateHint(str) {
+		sname = str;
+	    if (str.length == 0) {
+		document.getElementById("stateHint").innerHTML = "Start typing for suggestions";
+		return;
+	    } else {
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+		    if (this.readyState == 4 && this.status == 200) {
+		        document.getElementById("stateHint").innerHTML = this.responseText;
+		    }
+		};
+		xmlhttp.open("GET", "suggestState.php?q=" + str, true);
+		xmlhttp.send();
+	    }
+	}
+	
+	function showCityHint(str) {
+	    if (str.length == 0) {
+		document.getElementById("districtHint").innerHTML = "Start typing for suggestions";
+		return;
+	    } else {
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+		    if (this.readyState == 4 && this.status == 200) {
+		        document.getElementById("districtHint").innerHTML = this.responseText;
+		    }
+		};
+		xmlhttp.open("GET", "suggestCity.php?q=" + str + "&s=" + sname, true);
+		xmlhttp.send();
+	    }
+	}
+	</script>
+   </head>
+   <body>
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+         <form class="form-horizontal" id="signupform" action="print_card.php" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+               <h3 id="sectiontitle">COENSOBEC SignUp</h3>
+            </div>
+			
+            <div class="form-group">
+               <label class="control-label col-md-4" for="fname">First Name:</label>
+               <div class="col-md-6">
+                  <input type="text" class="form-control input" placeholder="First Name" name="fname" required>
+               </div>
+            </div>
+			<div class="form-group">
+               <label class="control-label col-md-4" for="lname">Last Name:</label>
+               <div class="col-md-6">
+                  <input type="text" class="form-control input" placeholder="Last Name" name="lname" required>
+               </div>
+            </div>
+			
+			<div class="form-group">
+               <label class="control-label col-md-4" for="add1">Address Line 1:</label>
+               <div class="col-md-6">
+                  <input type="text" class="form-control input" placeholder="Address Line 1" name="add1" maxlength="42" required>
+               </div>
+            </div>
+			<div class="form-group">
+               <label class="control-label col-md-4" for="add2">Address Line 2:</label>
+               <div class="col-md-6">
+                  <input type="text" class="form-control input" placeholder="Address Line 2" name="add2" maxlength="42">
+               </div>
+            </div>
+            <div class="form-group">
+               <label class="control-label col-md-4" for="state">State:</label>
+               <div class="col-md-6">
+                  <input type="text" class="form-control input" placeholder="State" name="state" onkeyup="showStateHint(this.value)" required>
+               </div>
+            </div>
+            
+            <div class="form-group">
+               <div class="col-md-3"></div>
+               Suggestions: <span id="stateHint"></span>
+            </div>
+            
+			<div class="form-group">
+               <label class="control-label col-md-4" for="city">City/District:</label>
+               <div class="col-md-6">
+                  <input type="text" class="form-control input" placeholder="City Name" name="city" onkeyup="showCityHint(this.value)" required>
+               </div>
+            </div>
+            
+            <div class="form-group">
+               <div class="col-md-3"></div>
+               Suggestions: <span id="districtHint"></span>
+            </div>
+            
+			<div class="form-group">
+               <label class="control-label col-md-4" for="pin">Pincode:</label>
+               <div class="col-md-6">
+                  <input type="text" class="form-control input" placeholder="Pincode" name="pin" required>
+               </div>
+            </div>
+			
+			<div class="form-group">
+               <label class="control-label col-md-4" for="year">Year of Joining:</label>
+               <div class="col-md-6">
+                  <input type="text" class="form-control input" placeholder="Year" name="year">
+               </div>
+            </div>
+			
+            <div class="form-group">
+               <label class="control-label col-md-4" for="prog">Programme:</label>
+               <div class="col-md-6">
+					<label class="radio-inline"><input class="input" name="prog" type="radio" value="B. Tech" checked>B.Tech</label>
+					<label class="radio-inline"><input class="input" name="prog" type="radio" value="M. Tech">M.Tech</label>
+					<label class="radio-inline"><input class="input" name="prog" type="radio" value="PhD">PhD</label>
+					<label class="radio-inline"><input class="input" name="prog" type="radio" value="M. Sc">M.Sc</label>
+					<label class="radio-inline"><input class="input" name="prog" type="radio" value="M. B. A">M.B.A</label>
+					<label class="radio-inline"><input class="input" name="prog" type="radio" value="B. Arch">B.Arch</label>
+               </div>
+            </div>
+			
+			<div class="form-group">
+               <label class="control-label col-md-4" for="dept">Department:</label>
+               <div class="col-md-6">
+                  <input type="text" class="form-control input" placeholder="Department" name="dept" required>
+               </div>
+            </div>
+			
+			<div class="form-group">
+               <label class="control-label col-md-4" for="id">Enrollment ID:</label>
+               <div class="col-md-6">
+                  <input type="text" class="form-control input" placeholder="Enrollment ID" name="id" required>
+               </div>
+            </div>
+			
+			<div class="form-group">
+               <label class="control-label col-md-4" for="pic">Recent Photograph:</label>
+               <div class="col-md-6">
+				  <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
+				  <input type="file" class="form-control input" name="pic" id="pic" accept="image/jpg" required>
+               </div>
+            </div>
+			
+			<br>
+			
+			<input type="hidden" name="mode" value="new" />
+
+            <div class="col-md-offset-4 col-md-4">
+               <input type="submit" class="btn btn-success btn-block" value="Submit">
+            </div>
+			<div class="col-md-2">
+               <input type="reset" class="btn btn-default btn-block" value="Reset">
+            </div>
+			<br><br><br>
+			<div class="col-md-8"></div>
+			<div class="col-md-3" id="back"> 
+				&nbsp &nbsp <a class="implink" href="index.html"> Back to Homepage </a> 
+			</div>
+         </form>
+		 
+      </div>
+      <div class="col-md-4"></div>
+	</body>
+</html>
